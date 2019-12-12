@@ -34,9 +34,16 @@ $ pip install pandas
 $ pip install opencv-python 
 $ pip install tensorflow
 $ pip install tensorflow-gpu
+
+- If error Illegal instruction(core dumped) tensorflow
+$ pip install tensorflow==1.15.0
+$ pip install tensorflow-gpu==1.15.0
 ```
+
 * Build protoc
 ```
+# protoc object_detection/protos/*.proto --python_out=.
+or
 # cd models/research
 # mkdir protoc_3.0
 # cd protoc_3.0
@@ -64,6 +71,8 @@ $ echo $PYTHONPATH
 * Training
 ```
 # cd model/research/object_detection
+# python generate_tfrecord.py --csv_input=images/train_labels.csv --image_dir=images/train --output_path=images/train.record
+# python generate_tfrecord.py --csv_input=images/test_labels.csv --image_dir=images/test --output_path=images/test.record
 # python train.py --train_dir=training/ --pipeline_config_path=training/ssd_mobilenet_v2_quantized_300x300_coco.config
 ```
 * Note
