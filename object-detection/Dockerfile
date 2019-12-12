@@ -2,23 +2,19 @@ FROM ubuntu:bionic
 
 MAINTAINER hainv.work.it@gmail.com
 
-RUN apt-get update && yes | apt-get upgrade
-
+RUN apt-get update
 RUN mkdir -p /tensorflow/models
+
 COPY . /tensorflow/
-
-RUN apt-get install -y python3-pip python-pip
-
-# Install lib
-RUN apt-get install -y protobuf-compiler python-pil python-lxml
-RUN pip3 install jupyter && pip3 install matplotlib && pip3 install protobuf && pip3 install pillow && pip3 install lxml && pip3 install Cython && pip3 install matplotlib && pip3 install pandas && pip3 install opencv-python && pip3 install tensorflow
 
 WORKDIR /tensorflow/models/research
 
-RUN protoc object_detection/protos/*.proto --python_out=.
+RUN apt-get install -y python3-pip
 
-RUN export PYTHONPATH=$PYTHONPATH:/tensorflow/models/research:/tensorflow/models/research/slim
-RUN echo $PYTHONPATH
+# Install lib
+RUN pip3 install jupyter && pip3 install matplotlib && pip3 install protobuf && pip3 install pillow && pip3 install lxml && pip3 install Cython && pip3 install matplotlib && pip3 install pandas && pip3 install opencv-python && pip3 install tensorflow
+
+RUN ./protoc_3.0/bin/protoc object_detection/protos/*.proto --python_out=.
 
 RUN jupyter notebook --generate-config --allow-root
 
@@ -36,4 +32,4 @@ RUN python3 object_detection/generate_tfrecord.py --csv_input=object_detection/i
 RUN python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/test_labels.csv --image_dir=object_detection/images/test --output_path=object_detection/images/test.record
 
 # Training
-RUN python3 object_detection/train.py --train_dir=object_detection/training/ --pipeline_config_path=object_detection/training/ssd_mobilenet_v2_quantized_300x300_coco.config
+# RUN python3 object_detection/train.py --train_dir=object_detection/training/ --pipeline_config_path=object_detection/training/ssd_mobilenet_v2_quantized_300x300_coco.config

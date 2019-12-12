@@ -4,9 +4,9 @@ services:
     tensorflow:
         build: .
         container_name: 'tensorflow-examples'
-        # env_file: .env
-        # volumes:
-        #     - ./models:/code/models
-        # command: bash -c "pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        env_file: .env
+        volumes:
+            - ./models:/tensorflow/models
+        command: bash -c "python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/train_labels.csv --image_dir=object_detection/images/train --output_path=object_detection/images/train.record && python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/test_labels.csv --image_dir=object_detection/images/test --output_path=object_detection/images/test.record && python3 object_detection/train.py --train_dir=object_detection/training/ --pipeline_config_path=object_detection/training/ssd_mobilenet_v2_quantized_300x300_coco.config"
         ports:
             - 8888:8888
