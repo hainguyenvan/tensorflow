@@ -1,2 +1,3 @@
 object-detection/models/research/object_detection/training/events.out.tfevents*
 object-detection/models/research/object_detection/training/model.ckpt*
+tflite-model
