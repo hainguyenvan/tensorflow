@@ -28,8 +28,8 @@ CMD ["jupyter", "notebook", "--allow-root", "--notebook-dir=/tensorflow/models/r
 RUN python3 setup.py build && python3 setup.py install
 
 # Create tfrecords
-RUN python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/train_labels.csv --image_dir=object_detection/images/train --output_path=object_detection/images/train.record
-RUN python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/test_labels.csv --image_dir=object_detection/images/test --output_path=object_detection/images/test.record
+# RUN python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/train_labels.csv --image_dir=object_detection/images/train --output_path=object_detection/images/train.record
+# RUN python3 object_detection/generate_tfrecord.py --csv_input=object_detection/images/test_labels.csv --image_dir=object_detection/images/test --output_path=object_detection/images/test.record
 
 # Training
 # RUN python3 object_detection/train.py --train_dir=object_detection/training/ --pipeline_config_path=object_detection/training/ssd_mobilenet_v2_quantized_300x300_coco.config

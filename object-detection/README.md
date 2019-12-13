@@ -82,7 +82,7 @@ $ echo $PYTHONPATH
 ```
 * Export tensorflow lite
 ```
-# python export_tflite_ssd_graph.py --pipeline_config_path=/home/tts/project/tensorflow/object-detection/models/research/object_detection/training/ssd_mobilenet_v2_quantized_300x300_coco.config --trained_checkpoint_prefix=/home/tts/project/tensorflow/object-detection/models/research/object_detection/training/model.ckpt-200 --output_directory=/home/tts/project/tensorflow/object-detection/tflite-model --add_postprocessing_op=true
+# python3 export_tflite_ssd_graph.py --pipeline_config_path=/tensorflow/object-detection/models/research/object_detection/training/ssd_mobilenet_v2_quantized_300x300_coco.config --trained_checkpoint_prefix=/tensorflow/object-detection/models/research/object_detection/training/model.ckpt-200 --output_directory=/tensorflow/object-detection/tflite-model --add_postprocessing_op=true
 ```
 
 ## Refs
